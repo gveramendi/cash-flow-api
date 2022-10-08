@@ -56,3 +56,7 @@
 - Test Cases: Los test cases que se implementaron estan en las clases:
     - AccountServiceTest
     - TransactionServiceTest
+
+5. Otros
+- Java Version: 11
+- Spring Boot Version: 2.7.4
