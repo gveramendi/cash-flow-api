@@ -24,6 +24,11 @@ public class AccountService {
     }
 
     public Account create(Account newAccount) {
+        Optional<Account> account = this.accountRepository.findByAccountNumber(newAccount.getAccountNumber());
+        if (account.isPresent()) {
+            throw new ResourceFormatException("Account " + newAccount.getAccountNumber() + "  already exists.");
+        }
+
         Account createdAccount;
         try {
             newAccount.setStatus(AccountStatus.ACTIVE);
@@ -34,7 +39,7 @@ public class AccountService {
             log.info("Account with id " + createdAccount.getId() + " was created.");
         } catch (Exception exception) {
             log.error("Created account error: " + exception.getMessage());
-            throw new ResourceFormatException("Created supplier error: " + exception.getMessage());
+            throw new ResourceFormatException("Created account error: " + exception.getMessage());
         }
 
         return createdAccount;
@@ -79,7 +84,7 @@ public class AccountService {
             updatedAccount = this.accountRepository.save(account);
         } catch (Exception exception) {
             log.error("Created account error: " + exception.getMessage());
-            throw new ResourceFormatException("Created supplier error: " + exception.getMessage());
+            throw new ResourceFormatException("Updated account error: " + exception.getMessage());
         }
 
         return updatedAccount;

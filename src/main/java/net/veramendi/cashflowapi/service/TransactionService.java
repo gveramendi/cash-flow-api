@@ -49,6 +49,12 @@ public class TransactionService {
         return this.transactionRepository.getAllByAccountId(accountId);
     }
 
+    public List<Transaction> getTransactionsByAccountNumber(String accountNumber) {
+        Account account = this.accountService.getByAccountNumber(accountNumber);
+
+        return this.transactionRepository.getAllByAccountId(account.getId());
+    }
+
     private Transaction createTransaction(Account account, Transaction newTransaction) {
         Transaction createdTransaction;
         try {

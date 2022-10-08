@@ -11,7 +11,7 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
